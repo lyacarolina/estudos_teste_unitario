@@ -1,8 +1,8 @@
 {
     "time": {
-        "updated": "Oct 20, 2023 19:58:00 UTC",
-        "updatedISO": "2023-10-20T19:58:00+00:00",
-        "updateduk": "Oct 20, 2023 at 20:58 BST"
+        "updated": "Oct 23, 2023 20:06:00 UTC",
+        "updatedISO": "2023-10-23T20:06:00+00:00",
+        "updateduk": "Oct 23, 2023 at 21:06 BST"
     },
     "disclaimer": "This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org",
     "chartName": "Bitcoin",
@@ -10,23 +10,23 @@
         "USD": {
             "code": "USD",
             "symbol": "&#36;",
-            "rate": "29,543.6235",
+            "rate": "31,406.5625",
             "description": "United States Dollar",
-            "rate_float": 29543.6235
+            "rate_float": 31406.5625
         },
         "GBP": {
             "code": "GBP",
             "symbol": "&pound;",
-            "rate": "24,686.4155",
+            "rate": "26,243.0724",
             "description": "British Pound Sterling",
-            "rate_float": 24686.4155
+            "rate_float": 26243.0724
         },
         "EUR": {
             "code": "EUR",
             "symbol": "&euro;",
-            "rate": "28,779.8027",
+            "rate": "30,594.5772",
             "description": "Euro",
-            "rate_float": 28779.8027
+            "rate_float": 30594.5772
         }
     }
 }
