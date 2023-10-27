@@ -51,7 +51,12 @@ def main(path=None):
         for k1 in columns_map.keys():
             for k2 in columns_map[k1].keys():
                 if k1 == bpi_code:
-                    df[k2] = base_df[columns_map[k1][k2]]
+                    try:
+                        df[k2] = base_df[columns_map[k1][k2]]
+                    except:
+                        print('doest not exists{} '.format(columns_map[k1][k2]) )
+                        df = None
+                        break
         return df
 
     ts = int(time.time())
@@ -59,13 +64,13 @@ def main(path=None):
         bpi_code = next(iter(v))
         bpis_code[i][bpi_code] = fill_bpi(base_df, bpi_code, columns_map)
         file_path = CSV_PATH.format(bpi_code, ts)
-        bpis_code[i][bpi_code].to_csv(file_path, index=False)
-        ret['{}_file_path'.format(bpi_code).lower()] = file_path
+        
+        if bpis_code[i][bpi_code] is not None:
+            bpis_code[i][bpi_code].to_csv(file_path, index=False)
+            ret['{}_file_path'.format(bpi_code).lower()] = file_path
     
     if len(ret.keys()) != len(bpis_code):
-        raise Exception(
-            "bpi and files are not the same.\nret.keys: {}\nbpis_code: {}\n{}".format(ret.keys(), bpis_code)
-        )
+        raise Exception('bpi and files are not the same.')
     return ret
 
 

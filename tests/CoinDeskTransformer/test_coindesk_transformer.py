@@ -3,9 +3,11 @@ import json
 import pytest
 import unittest
 import pandas as pd
+from unittest import mock
 import src.CoinDeskTransformer.coindesk_transformer as coindesk_transformer
 
-TEST_FILE_PATH = 'tests/CoinDeskTransformer/1698148495.json'
+TEST_FILE_PATH = 'tests/TestCoinDeskTransformer/1644270047.json'
+TEST_WITHOUT_USD_FILE_PATH = 'tests/TestCoinDeskTransformer/1644270047-without-USD.json'
 
 class TestCoinDeskTransformer(unittest.TestCase):    
                
@@ -30,7 +32,7 @@ class TestCoinDeskTransformer(unittest.TestCase):
         """Testa o resultado de usd"""
         ret = coindesk_transformer.main(TEST_FILE_PATH)
         
-        mock_df = pd.read_csv('tests/CoinDeskTransformer/usd.csv')
+        mock_df = pd.read_csv('tests/TestCoinDeskTransformer/usd.csv')
         df = pd.read_csv(ret['usd_file_path'])
         self.assertIsNone(
             pd.testing.assert_frame_equal(mock_df, df)
@@ -41,7 +43,7 @@ class TestCoinDeskTransformer(unittest.TestCase):
         """Testa o resultado de eur"""
         ret = coindesk_transformer.main(TEST_FILE_PATH)
         
-        mock_df = pd.read_csv('tests/CoinDeskTransformer/eur.csv')
+        mock_df = pd.read_csv('tests/TestCoinDeskTransformer/eur.csv')
         df = pd.read_csv(ret['eur_file_path'])
         self.assertIsNone(
             pd.testing.assert_frame_equal(mock_df, df)
@@ -52,12 +54,19 @@ class TestCoinDeskTransformer(unittest.TestCase):
         """Testa o resultado de gbp"""
         ret = coindesk_transformer.main(TEST_FILE_PATH)
         
-        mock_df = pd.read_csv('tests/CoinDeskTransformer/gbp.csv')
+        mock_df = pd.read_csv('tests/TestCoinDeskTransformer/gbp.csv')
         df = pd.read_csv(ret['gbp_file_path'])
         self.assertIsNone(
             pd.testing.assert_frame_equal(mock_df, df)
         )
-
+    
+    def test_coindesk_transformer_result_without_usd(self):
+        """Testa o resultado se USD"""
+        
+        error = "bpi and files are not the same."
+        with pytest.raises(Exception) as err:
+            ret = coindesk_transformer.main(TEST_WITHOUT_USD_FILE_PATH)
+        self.assertEqual(error, str(err.value))
 
 if __name__ == '__main__':
     unittest.main()
